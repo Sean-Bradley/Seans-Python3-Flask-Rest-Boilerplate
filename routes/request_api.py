@@ -1,4 +1,3 @@
-# from app import app
 from flask import jsonify, abort, request, Blueprint
 from datetime import datetime, timedelta
 import uuid

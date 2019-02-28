@@ -1,4 +1,4 @@
-## Seans Python API Boilerplate
+## Seans Python3 Flask Rest Boilerplate
 
 ### To Setup and Start
 ```bash
