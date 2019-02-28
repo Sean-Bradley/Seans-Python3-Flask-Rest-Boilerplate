@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  web:
+    container_name: nginx
+    build: 
+      context: . 
+      dockerfile: DockerfileNginx
+    ports:
+      - "80:80"
+    command: nginx -g "daemon off";
+    depends_on:      
+      - python_api
+
+  python_api:
+    build: 
+      context: . 
+      dockerfile: DockerfilePython
+    expose:
+      - "5000"
+    command: gunicorn -w 1 app:app -b :5000 --reload
