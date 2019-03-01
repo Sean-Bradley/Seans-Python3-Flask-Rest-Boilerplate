@@ -30,7 +30,7 @@ bookRequests = [
 def get_records():
     try:
         return jsonify({'requests': bookRequests})
-    except Exception as e:
+    except Exception:
         abort(400)
 
 
@@ -41,8 +41,7 @@ def get_record_by_id(id):
         req = [req for req in bookRequests if req['id'] == id]
         if len(req) == 0:
             notFound = True
-    except Exception as e:
-        print("in error")
+    except Exception:
         abort(400)
 
     if notFound:
@@ -55,18 +54,15 @@ def get_record_by_id(id):
 def create_record():
     if request.get_json():
         data = request.get_json(force=True)
-        if data['email'] and validate_email(data['email']):
-            if data['title']:
+        if data.get('email') and validate_email(data['email']):
+            if data.get('title'):
                 newUUID = str(uuid.uuid4())
-                print(newUUID)
-                print(str(datetime.now()))
                 bookRequest = {
                     'id': newUUID,
                     'title': data['title'],
                     'email': data['email'],
                     'timestamp': datetime.now()
                 }
-                print(bookRequest)
                 bookRequests.append(bookRequest)
                 # HTTP 201 Created
                 return jsonify({'request': bookRequest}), 201
@@ -85,7 +81,7 @@ def delete_record(id):
         req = [req for req in bookRequests if req['id'] == id]
         if len(req) == 0:
             notFound = True
-    except Exception as e:
+    except Exception:
         abort(400)
 
     if notFound:
