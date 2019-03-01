@@ -2,6 +2,7 @@ from nose.tools import assert_true
 import requests
 
 baseUrl = "http://127.0.0.1"
+#baseUrl = "http://localhost:5000"
 UUID = None
 
 

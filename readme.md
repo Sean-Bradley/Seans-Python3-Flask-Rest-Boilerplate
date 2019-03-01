@@ -31,7 +31,7 @@ curl -X DELETE http://127.0.0.1/request/04cfc704-acb2-40af-a8d3-4611fab54ada
 ```bash
 nosetests --verbosity=2
 ```
-**NOTE: the tests expect your are running the app via docker-compose -ip and on the same computer.**
+**NOTE: the tests expect your are running the app via `docker-compose -up` and on the same computer.**
 If you run the app from python directly,
 eg,
 ```bash
