@@ -1,0 +1,7 @@
+{
+    "name": "seans-python3-flask-rest-boilerplate ",
+    "description": "A barebones Python3 Flask Rest Example",
+    "repository": "https://github.com/Sean-Bradley/Seans-Python3-Flask-Rest-Boilerplate",
+    "logo": "https://github.com/Sean-Bradley/Seans-TypeScript-NodeJS-CRUD-REST-API-Boilerplate/blob/master/cosmo1.png",
+    "keywords": ["python", "flask", "rest", "crud", "seanwasere"]
+  }

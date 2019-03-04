@@ -61,3 +61,13 @@ Ran 13 tests in 0.188s
 
 OK
 ```
+
+## Heroku
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](
+    https://heroku.com/deploy?template=https://github.com/Sean-Bradley/Seans-Python3-Flask-Rest-Boilerplate)
+
+You can also test this api on heroku
+https://seans-python3-flask-rest.herokuapp.com/request
+
+use the above curl commands replacing `http://127.0.0.1` with `https://seans-python3-flask-rest.herokuapp.com`
+
