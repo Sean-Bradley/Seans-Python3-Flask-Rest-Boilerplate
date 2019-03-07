@@ -15,7 +15,7 @@
   "servers": [
     {
       "url": "/",
-      "description": "Local Dev, or from Heroku"
+      "description": "Local Dev"
     },
     {
       "url": "/api/",
