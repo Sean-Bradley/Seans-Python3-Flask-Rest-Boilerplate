@@ -1,8 +1,9 @@
 import argparse
-from flask import Flask, jsonify, make_response
+from flask import Flask, jsonify, make_response, send_from_directory
 from flask_cors import CORS
 from routes import request_api
 import os
+from flask_swagger_ui import get_swaggerui_blueprint
 
 app = Flask(__name__)
 CORS(app)
@@ -40,6 +41,23 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     port = int(os.environ.get('PORT', 5000))
+
+    # URL for exposing Swagger UI (without trailing '/')
+    SWAGGER_URL = '/swagger'
+    # Our API url (can of course be a local resource)
+    API_URL = '/static/swagger.json'
+    swaggerui_blueprint = get_swaggerui_blueprint(
+        # Swagger UI static files will be mapped to '{SWAGGER_URL}/dist/'
+        SWAGGER_URL,
+        API_URL,
+        config={ 
+            'app_name': "Seans-Python-Flask-REST-Boilerplate"
+        }
+    )
+    app.register_blueprint(swaggerui_blueprint, url_prefix=SWAGGER_URL)
+    @app.route('/static/<path:path>')
+    def send_static(path):
+        return send_from_directory('static', path)
 
     if args.debug:
         print("Running in debug mode")
