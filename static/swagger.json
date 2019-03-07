@@ -28,12 +28,6 @@
       "description": "Example API for requesting and retunr book requests"
     }
   ],
-  "consumes": [
-    "application/json"
-  ],
-  "produces": [
-    "application/json"
-  ],
   "paths": {
     "/request": {
       "get": {
@@ -45,7 +39,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/bookRequest"
+              "$ref": "#/components/schemas/bookRequest"
             }
           }
         }
@@ -61,7 +55,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/definitions/bookRequestPostBody"
+                "$ref": "#/components/schemas/bookRequestPostBody"
               }
             }
           }
@@ -73,7 +67,7 @@
           "201": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/bookRequest"
+              "$ref": "#/components/schemas/bookRequest"
             }
           },
           "400": {
@@ -104,7 +98,7 @@
             "required": true,
             "description": "Book Request id",
             "schema": {
-              "$ref": "#/definitions/id"
+              "$ref": "#/components/schemas/id"
             }
           }
         ],
@@ -112,7 +106,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/bookRequest"
+              "$ref": "#/components/schemas/bookRequest"
             }
           },
           "400": {
@@ -135,7 +129,7 @@
             "required": true,
             "description": "Book Request Id",
             "schema": {
-              "$ref": "#/definitions/id"
+              "$ref": "#/components/schemas/id"
             }
           }
         ],
@@ -143,7 +137,7 @@
           "204": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/id"
+              "$ref": "#/components/schemas/id"
             }
           },
           "400": {
@@ -156,45 +150,47 @@
       }
     }
   },
-  "definitions": {
-    "id": {
-      "properties": {
-        "uuid": {
-          "type": "string"
+  "components": {
+    "schemas": {
+      "id": {
+        "properties": {
+          "uuid": {
+            "type": "string"
+          }
         }
-      }
-    },
-    "bookRequestPostBody": {
-      "type": "object",
-      "properties": {
-        "title": {
-          "type": "string",
-          "format": "string"
-        },
-        "email": {
-          "type": "string",
-          "format": "email"
+      },
+      "bookRequestPostBody": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "format": "string"
+          },
+          "email": {
+            "type": "string",
+            "format": "email"
+          }
         }
-      }
-    },
-    "bookRequest": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "format": "UUID"
-        },
-        "title": {
-          "type": "string",
-          "format": "string"
-        },
-        "email": {
-          "type": "string",
-          "format": "email"
-        },
-        "timestamp": {
-          "type": "string",
-          "format": "date-time"
+      },
+      "bookRequest": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "UUID"
+          },
+          "title": {
+            "type": "string",
+            "format": "string"
+          },
+          "email": {
+            "type": "string",
+            "format": "email"
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time"
+          }
         }
       }
     }
