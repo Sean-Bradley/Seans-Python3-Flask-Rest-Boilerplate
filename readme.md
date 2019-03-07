@@ -71,3 +71,17 @@ https://seans-python3-flask-rest.herokuapp.com/request
 
 use the above curl commands replacing `http://127.0.0.1` with `https://seans-python3-flask-rest.herokuapp.com`
 
+## Swagger UI
+![swagger.png](swagger.png)
+
+Hosted Locally
+http://127.0.0.1:5000/swagger/
+
+##
+Hosted via Heroku
+https://seans-python3-flask-rest.herokuapp.com/swagger
+
+##
+Hosted via Docker-compose and Nginx
+http://127.0.0.1/api/swagger/
+
