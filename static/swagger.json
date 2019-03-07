@@ -14,12 +14,7 @@
   },
   "servers": [
     {
-      "url": "/",
-      "description": "Local Dev"
-    },
-    {
-      "url": "/api/",
-      "description": "With docker-compose and nginx proxy"
+      "url": "/"
     }
   ],
   "tags": [
