@@ -1,8 +1,9 @@
 from nose.tools import assert_true
 import requests
 
-baseUrl = "http://127.0.0.1"
-#baseUrl = "http://localhost:5000"
+# baseUrl = "http://127.0.0.1"
+baseUrl = "http://localhost:5000"
+# baseUrl = "https://python3-flask-uat.herokuapp.com/"
 UUID = None
 
 
@@ -30,8 +31,34 @@ def test_add_new_record():
     global UUID
     payload = {'title': 'Good & Bad Book', 'email': 'testuser3@test.com'}
     response = requests.post('%s/request' % (baseUrl), json=payload)
-    UUID = str(response.json()['request']['id'])
+    UUID = str(response.json()['id'])
     assert_true(response.status_code == 201)
+
+
+def test_get_new_record():
+    global baseUrl
+    global UUID
+    url = '%s/request/%s' % (baseUrl, UUID)
+    response = requests.get(url)
+    assert_true(response.ok)
+
+
+def test_edit_new_record_title():
+    global baseUrl
+    global UUID
+    payload = {'title': 'edited Good & Bad Book',
+               'email': 'testuser3@test.com'}
+    response = requests.put('%s/request/%s' % (baseUrl, UUID), json=payload)
+    assert_true(response.json()['title'] == "edited Good & Bad Book")
+
+
+def test_edit_new_record_email():
+    global baseUrl
+    global UUID
+    payload = {'title': 'edited Good & Bad Book',
+               'email': 'testuser4@test.com'}
+    response = requests.put('%s/request/%s' % (baseUrl, UUID), json=payload)
+    assert_true(response.json()['email'] == "testuser4@test.com")
 
 
 def test_add_new_record_bad_email_format():
@@ -80,14 +107,6 @@ def test_add_new_record_no_payload():
     payload = None
     response = requests.post('%s/request' % (baseUrl), json=payload)
     assert_true(response.status_code == 400)
-
-
-def test_get_new_record():
-    global baseUrl
-    global UUID
-    url = '%s/request/%s' % (baseUrl, UUID)
-    response = requests.get(url)
-    assert_true(response.ok)
 
 
 def test_delete_new_record():

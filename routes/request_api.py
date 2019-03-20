@@ -2,7 +2,6 @@ from flask import jsonify, abort, request, Blueprint
 from datetime import datetime, timedelta
 import uuid
 from validate_email import validate_email
-
 request_api = Blueprint('request_api', __name__)
 
 
@@ -10,83 +9,87 @@ def get_blueprint():
     return request_api
 
 
-bookRequests = [
-    {
-        'id': "8c36e86c-13b9-4102-a44f-646015dfd981",
+bookRequests = {
+    "8c36e86c-13b9-4102-a44f-646015dfd981": {
         'title': u'Good Book',
         'email': u'testuser1@test.com',
-        'timestamp': datetime.today() - timedelta(1)  # yesterday
+        'timestamp': (datetime.today() - timedelta(1)).timestamp()
     },
-    {
-        'id': "04cfc704-acb2-40af-a8d3-4611fab54ada",
+    "04cfc704-acb2-40af-a8d3-4611fab54ada": {
         'title': u'Bad Book',
         'email': u'testuser2@test.com',
-        'timestamp': datetime.today() - timedelta(2)  # 2 days ago
+        'timestamp': (datetime.today() - timedelta(2)).timestamp()
     }
-]
+}
 
 
 @request_api.route('/request', methods=['GET'])
 def get_records():
-    try:
-        return jsonify({'requests': bookRequests})
-    except Exception:
-        abort(400)
+    return jsonify(bookRequests)
 
 
 @request_api.route('/request/<string:id>', methods=['GET'])
 def get_record_by_id(id):
-    notFound = False
-    try:
-        req = [req for req in bookRequests if req['id'] == id]
-        if len(req) == 0:
-            notFound = True
-    except Exception:
-        abort(400)
-
-    if notFound:
+    if id not in bookRequests:
         abort(404)
-    else:
-        return jsonify({'request': req[0]})
+    return jsonify(bookRequests[id], 204)
 
 
 @request_api.route('/request', methods=['POST'])
 def create_record():
-    if request.get_json():
-        data = request.get_json(force=True)
-        if data.get('email') and validate_email(data['email']):
-            if data.get('title'):
-                newUUID = str(uuid.uuid4())
-                bookRequest = {
-                    'id': newUUID,
-                    'title': data['title'],
-                    'email': data['email'],
-                    'timestamp': datetime.now()
-                }
-                bookRequests.append(bookRequest)
-                # HTTP 201 Created
-                return jsonify({'request': bookRequest}), 201
-            else:
-                abort(400)
-        else:
-            abort(400)
-    else:
+    if not request.get_json():
         abort(400)
+    data = request.get_json(force=True)
+
+    if not data.get('email'):
+        abort(400)
+    if not validate_email(data['email']):
+        abort(400)
+    if not data.get('title'):
+        abort(400)
+
+    newUUID = str(uuid.uuid4())
+    bookRequest = {
+        'title': data['title'],
+        'email': data['email'],
+        'timestamp': datetime.now().timestamp()
+    }
+    bookRequests[newUUID] = bookRequest
+    # HTTP 201 Created
+    return jsonify({"id": newUUID}), 201
+
+
+@request_api.route('/request/<string:id>', methods=['PUT'])
+def edit_record(id):
+    if id not in bookRequests:
+        abort(404)
+
+    if not request.get_json():
+        abort(400)
+    data = request.get_json(force=True)
+
+    if not data.get('email'):
+        abort(400)
+    if not validate_email(data['email']):
+        abort(400)
+    if not data.get('title'):
+        abort(400)
+
+    bookRequest = {
+        'title': data['title'],
+        'email': data['email'],
+        'timestamp': datetime.now().timestamp()
+    }
+
+    bookRequests[id] = bookRequest
+    return jsonify(bookRequests[id]), 200
 
 
 @request_api.route('/request/<string:id>', methods=['DELETE'])
 def delete_record(id):
-    notFound = False
-    try:
-        req = [req for req in bookRequests if req['id'] == id]
-        if len(req) == 0:
-            notFound = True
-    except Exception:
-        abort(400)
-
-    if notFound:
+    if id not in bookRequests:
         abort(404)
-    else:
-        bookRequests.remove(req[0])
-        # HTTP 204 No Content
-        return ('', 204)
+
+    del bookRequests[id]
+
+    return ('', 204)
