@@ -15,9 +15,6 @@
   "servers": [
     {
       "url": "/"
-    },
-    {
-      "url": "http://127.0.0.1:5000/"
     }
   ],
   "tags": [
@@ -119,6 +116,17 @@
         "summary": "edit a book request by ID",
         "tags": [
           "Book Request"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "Book Request id",
+            "schema": {
+              "$ref": "#/components/schemas/id"
+            }
+          }
         ],
         "requestBody": {
           "description": "Book Request Object",

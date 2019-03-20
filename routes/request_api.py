@@ -32,7 +32,7 @@ def get_records():
 def get_record_by_id(id):
     if id not in bookRequests:
         abort(404)
-    return jsonify(bookRequests[id], 204)
+    return jsonify(bookRequests[id])
 
 
 @request_api.route('/request', methods=['POST'])
@@ -92,4 +92,4 @@ def delete_record(id):
 
     del bookRequests[id]
 
-    return ('', 204)
+    return '', 204
