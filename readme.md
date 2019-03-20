@@ -41,23 +41,25 @@ The endpoint will be http://localhost:5000 rather than the endpoint exposed via 
 
 ### Test Output
 ```bash
-$ nosetests --verbosity=2
+$ nosetests --verbose --nocapture
 app_test.test_get_all_requests ... ok
 app_test.test_get_individual_request ... ok
 app_test.test_get_individual_request_404 ... ok
 app_test.test_add_new_record ... ok
+app_test.test_get_new_record ... ok
+app_test.test_edit_new_record_title ... ok
+app_test.test_edit_new_record_email ... ok
 app_test.test_add_new_record_bad_email_format ... ok
 app_test.test_add_new_record_bad_title_key ... ok
 app_test.test_add_new_record_no_email_key ... ok
 app_test.test_add_new_record_no_title_key ... ok
 app_test.test_add_new_record_unicode_title ... ok
 app_test.test_add_new_record_no_payload ... ok
-app_test.test_get_new_record ... ok
 app_test.test_delete_new_record ... ok
 app_test.test_delete_new_record_404 ... ok
 
-----------------------------------------------------------------------
-Ran 13 tests in 0.188s
+------------------------------------------------------------------------------------
+Ran 15 tests in 15.285s
 
 OK
 ```
