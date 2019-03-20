@@ -1,7 +1,7 @@
 ## Seans Python3 Flask Rest Boilerplate
 
 ### MIT License
-Rememeber, No guarantess, or even fit for a particular purpose.
+Rememeber, No guarantees, or even fit for a particular purpose.
 
 This project will be updated slowly as required, so stay tuned.
 
