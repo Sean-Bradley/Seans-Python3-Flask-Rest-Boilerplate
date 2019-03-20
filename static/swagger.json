@@ -15,12 +15,15 @@
   "servers": [
     {
       "url": "/"
+    },
+    {
+      "url": "http://127.0.0.1:5000/"
     }
   ],
   "tags": [
     {
       "name": "Book Request",
-      "description": "Example API for requesting and retunr book requests"
+      "description": "Example API for requesting and return book requests"
     }
   ],
   "paths": {
@@ -34,7 +37,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/components/schemas/bookRequest"
+              "$ref": "#/components/schemas/bookRequests"
             }
           }
         }
@@ -45,7 +48,7 @@
         ],
         "summary": "Create a new book request system",
         "requestBody": {
-          "description": "Book Request Object",
+          "description": "Book Request Post Object",
           "required": true,
           "content": {
             "application/json": {
@@ -62,7 +65,7 @@
           "201": {
             "description": "OK",
             "schema": {
-              "$ref": "#/components/schemas/bookRequest"
+              "$ref": "#/components/schemas/id"
             }
           },
           "400": {
@@ -109,6 +112,37 @@
           },
           "404": {
             "description": "Failed. Book request not found."
+          }
+        }
+      },
+      "put": {
+        "summary": "edit a book request by ID",
+        "tags": [
+          "Book Request"
+        ],
+        "requestBody": {
+          "description": "Book Request Object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/bookRequest"
+              }
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/components/schemas/bookRequest"
+            }
+          },
+          "400": {
+            "description": "Failed. Bad post data."
           }
         }
       },
@@ -170,10 +204,6 @@
       "bookRequest": {
         "type": "object",
         "properties": {
-          "id": {
-            "type": "string",
-            "format": "UUID"
-          },
           "title": {
             "type": "string",
             "format": "string"
@@ -184,7 +214,18 @@
           },
           "timestamp": {
             "type": "string",
-            "format": "date-time"
+            "format": "number"
+          }
+        }
+      },
+      "bookRequests": {
+        "type": "object",
+        "properties": {
+          "bookRequest": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/bookRequest"
+            }
           }
         }
       }
