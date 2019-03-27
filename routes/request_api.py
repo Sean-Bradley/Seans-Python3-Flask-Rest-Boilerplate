@@ -1,15 +1,18 @@
-from flask import jsonify, abort, request, Blueprint
-from datetime import datetime, timedelta
+"""The Endpoints to manage the BOOK_REQUESTS"""
 import uuid
+from datetime import datetime, timedelta
+from flask import jsonify, abort, request, Blueprint
+
 from validate_email import validate_email
-request_api = Blueprint('request_api', __name__)
+REQUEST_API = Blueprint('request_api', __name__)
 
 
 def get_blueprint():
-    return request_api
+    """Return the blueprint for the main app module"""
+    return REQUEST_API
 
 
-bookRequests = {
+BOOK_REQUESTS = {
     "8c36e86c-13b9-4102-a44f-646015dfd981": {
         'title': u'Good Book',
         'email': u'testuser1@test.com',
@@ -23,20 +26,37 @@ bookRequests = {
 }
 
 
-@request_api.route('/request', methods=['GET'])
+@REQUEST_API.route('/request', methods=['GET'])
 def get_records():
-    return jsonify(bookRequests)
+    """Return all book requests
+    @return: 200: an array of all known BOOK_REQUESTS as a \
+    flask/response object with application/json mimetype.
+    """
+    return jsonify(BOOK_REQUESTS)
 
 
-@request_api.route('/request/<string:id>', methods=['GET'])
-def get_record_by_id(id):
-    if id not in bookRequests:
+@REQUEST_API.route('/request/<string:_id>', methods=['GET'])
+def get_record_by_id(_id):
+    """Get book request details by it's id
+    @param _id: the id
+    @return: 200: a BOOK_REQUESTS as a flask/response object \
+    with application/json mimetype.
+    @raise 404: if book request not found
+    """
+    if _id not in BOOK_REQUESTS:
         abort(404)
-    return jsonify(bookRequests[id])
+    return jsonify(BOOK_REQUESTS[_id])
 
 
-@request_api.route('/request', methods=['POST'])
+@REQUEST_API.route('/request', methods=['POST'])
 def create_record():
+    """Create a book request record
+    @param email: post : the requesters email address
+    @param title: post : the title of the book requested
+    @return: 201: a new_uuid as a flask/response object \
+    with application/json mimetype.
+    @raise 400: misunderstood request
+    """
     if not request.get_json():
         abort(400)
     data = request.get_json(force=True)
@@ -48,20 +68,27 @@ def create_record():
     if not data.get('title'):
         abort(400)
 
-    newUUID = str(uuid.uuid4())
-    bookRequest = {
+    new_uuid = str(uuid.uuid4())
+    book_request = {
         'title': data['title'],
         'email': data['email'],
         'timestamp': datetime.now().timestamp()
     }
-    bookRequests[newUUID] = bookRequest
+    BOOK_REQUESTS[new_uuid] = book_request
     # HTTP 201 Created
-    return jsonify({"id": newUUID}), 201
+    return jsonify({"id": new_uuid}), 201
 
 
-@request_api.route('/request/<string:id>', methods=['PUT'])
-def edit_record(id):
-    if id not in bookRequests:
+@REQUEST_API.route('/request/<string:_id>', methods=['PUT'])
+def edit_record(_id):
+    """Edit a book request record
+    @param email: post : the requesters email address
+    @param title: post : the title of the book requested
+    @return: 200: a booke_request as a flask/response object \
+    with application/json mimetype.
+    @raise 400: misunderstood request
+    """
+    if _id not in BOOK_REQUESTS:
         abort(404)
 
     if not request.get_json():
@@ -75,21 +102,26 @@ def edit_record(id):
     if not data.get('title'):
         abort(400)
 
-    bookRequest = {
+    book_request = {
         'title': data['title'],
         'email': data['email'],
         'timestamp': datetime.now().timestamp()
     }
 
-    bookRequests[id] = bookRequest
-    return jsonify(bookRequests[id]), 200
+    BOOK_REQUESTS[_id] = book_request
+    return jsonify(BOOK_REQUESTS[_id]), 200
 
 
-@request_api.route('/request/<string:id>', methods=['DELETE'])
-def delete_record(id):
-    if id not in bookRequests:
+@REQUEST_API.route('/request/<string:_id>', methods=['DELETE'])
+def delete_record(_id):
+    """Delete a book request record
+    @param id: the id
+    @return: 204: an empty payload.
+    @raise 404: if book request not found
+    """
+    if _id not in BOOK_REQUESTS:
         abort(404)
 
-    del bookRequests[id]
+    del BOOK_REQUESTS[_id]
 
     return '', 204
