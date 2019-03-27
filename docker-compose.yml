@@ -18,4 +18,4 @@ services:
       dockerfile: DockerfilePython
     expose:
       - "5000"
-    command: gunicorn -w 1 app:app -b :5000 --reload
+    command: gunicorn -w 1 app:APP -b :5000 --reload
