@@ -2,6 +2,7 @@
 import uuid
 from datetime import datetime, timedelta
 from flask import jsonify, abort, request, Blueprint
+import time
 
 from validate_email import validate_email
 REQUEST_API = Blueprint('request_api', __name__)
@@ -125,3 +126,13 @@ def delete_record(_id):
     del BOOK_REQUESTS[_id]
 
     return '', 204
+
+
+
+
+@REQUEST_API.route('/slowrequest/<int:seconds>', methods=['GET'])
+def get_slowrequest(seconds):
+    """a sample slow request, which will sleep N seconds
+    """
+    time.sleep(seconds)
+    return jsonify(BOOK_REQUESTS)
