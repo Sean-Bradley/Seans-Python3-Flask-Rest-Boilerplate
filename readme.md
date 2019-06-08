@@ -78,14 +78,6 @@ Ran 15 tests in 15.285s
 OK
 ```
 
-## Heroku
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](
-    https://heroku.com/deploy?template=https://github.com/Sean-Bradley/Seans-Python3-Flask-Rest-Boilerplate)
-
-You can also test this api on heroku
-https://seans-python3-flask-rest.herokuapp.com/request
-
-use the above curl commands replacing `http://127.0.0.1` with `https://seans-python3-flask-rest.herokuapp.com`
 
 ## Swagger UI
 ![swagger.png](swagger.png)
@@ -93,13 +85,33 @@ use the above curl commands replacing `http://127.0.0.1` with `https://seans-pyt
 Hosted Locally
 http://127.0.0.1:5000/swagger/
 
-##
+###
 Hosted via Heroku
 https://seans-python3-flask-rest.herokuapp.com/swagger/
 
-##
+###
 Hosted via Docker-compose and Nginx
 http://127.0.0.1/swagger/
+
+### Video Tutorial on adding Swagger-UI to this Python Flask API 
+[![Video Tutorial on adding Swagger-UI to Python Flask API](https://img.youtube.com/vi/iZ2Tah3IxQc/0.jpg)](https://youtu.be/iZ2Tah3IxQc)
+
+
+
+## Heroku
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](
+    https://heroku.com/deploy?template=https://github.com/Sean-Bradley/Seans-Python3-Flask-Rest-Boilerplate)
+
+You can also test this api on heroku.
+
+Live : https://seans-python3-flask-rest.herokuapp.com/request
+
+use the above curl commands replacing `http://127.0.0.1` with `https://seans-python3-flask-rest.herokuapp.com`
+
+### Video Tutorial Hosting this Python Flask Rest API on Heroku
+
+[![Video Tutorial Hosting this Python Flask Rest API on Heroku](https://img.youtube.com/vi/O_xEqtjh1io/0.jpg)](https://youtu.be/O_xEqtjh1io)
+
 
 
 
