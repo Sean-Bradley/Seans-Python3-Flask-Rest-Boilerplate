@@ -11,47 +11,39 @@ Your contributions will be visible since this project is public.
 
 ### To Setup and Start
 ```bash
-docker-compose up
+pip install -r requirements.txt 
+python app.py
 ```
 
 ### Get All Request Records
 ```bash
-curl -X GET http://127.0.0.1/request
+curl -X GET http://127.0.0.1:5000/request
 ```
 
 ### Get One Request Record
 ```bash
-curl -X GET http://127.0.0.1/request/04cfc704-acb2-40af-a8d3-4611fab54ada
+curl -X GET http://127.0.0.1:5000/request/04cfc704-acb2-40af-a8d3-4611fab54ada
 ```
 
 ### Add A New Record
 ```bash
-curl -X POST http://127.0.0.1/request -H 'Content-Type: application/json' -d '{"title":"Good & Bad Book", "email": "testuser3@test.com"}'
+curl -X POST http://127.0.0.1:5000/request -H 'Content-Type: application/json' -d '{"title":"Good & Bad Book", "email": "testuser3@test.com"}'
 ```
 
 ### Edit An Existing Record
 ```bash
-curl -X PUT http://127.0.0.1/request -H 'Content-Type: application/json' -d '{"title":"edited Good & Bad Book", "email": "testuser4@test.com"}'
+curl -X PUT http://127.0.0.1:5000/request -H 'Content-Type: application/json' -d '{"title":"edited Good & Bad Book", "email": "testuser4@test.com"}'
 ```
 
 ### Delete A Record
 ```bash
-curl -X DELETE http://127.0.0.1/request/04cfc704-acb2-40af-a8d3-4611fab54ada
+curl -X DELETE http://127.0.0.1:5000/request/04cfc704-acb2-40af-a8d3-4611fab54ada
 ```
-
-
 
 ## Unit Test with Nose
 ```bash
 nosetests --verbosity=2
 ```
-**NOTE: the tests expect your are running the app via `docker-compose -up` and on the same computer.**
-If you run the app from python directly,
-eg,
-```bash
-python app.py --debug
-```
-The endpoint will be http://localhost:5000 rather than the endpoint exposed via running it in the docker-compose. You should change the baseUrl in the script /tests/app_test.py to suit your environment
 
 ### Test Output
 ```bash
