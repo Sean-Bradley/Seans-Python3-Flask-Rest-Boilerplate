@@ -13,6 +13,7 @@ services:
       - python_api
 
   python_api:
+    container_name: python
     build: 
       context: . 
       dockerfile: DockerfilePython
