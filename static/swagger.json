@@ -4,9 +4,6 @@
     "description": "sean",
     "version": "1.0.0",
     "title": "Seans-Python3-Flask-Rest-Boilerplate",
-    "contact": {
-      "email": "seanwasere@gmail.com"
-    },
     "license": {
       "name": "MIT",
       "url": "https://opensource.org/licenses/MIT"
