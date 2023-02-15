@@ -1,5 +1,5 @@
 ﻿Flask==1.0.2
-Werkzeug==0.15.5
+Werkzeug==2.2.3
 flask_cors==3.0.9 
 gunicorn==19.9.0
 validate_email==1.3
